@@ -1,0 +1,15 @@
+{
+  "name": "restaurant-wheel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Restaurant-Wheel/restuarant-wheel.github.io.git",
+  "contributors": [
+    "Garrett Wezniak <gaarj4@gmail.com>",
+    "Connor Goldsmith"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "pug": "^2.0.3"
+  }
+}
