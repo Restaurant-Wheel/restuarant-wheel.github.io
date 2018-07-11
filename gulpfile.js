@@ -8,7 +8,6 @@ const filter = require('gulp-filter')
 const rename = require('gulp-rename');
 const jsmin = require('gulp-jsmin');
 const clean = require('gulp-clean');
-const cache = require('gulp-cache');
 
 gulp.task('js', () => {
     return gulp.src('./src/js/*.js')
