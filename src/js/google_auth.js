@@ -102,7 +102,7 @@ function getFile(id) {
             mimeType: "text/tab-separated-values"
         }).then(function (response) {
             console.log("File imported:\n" + JSON.stringify(response.body));
-            // console.log("Restaurants parsed.");
+            parseSubmissions(JSON.stringify(response.body))
         })
         .catch(err => console.log(err));
 }
