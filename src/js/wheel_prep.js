@@ -21,11 +21,15 @@ function parseSubmissions(tsv) {
 
   // Parse into custom object
   for (var i = 1; i < submissions.length; i++) {
-    // timestamp, email, restaurants
+    // submission := [timestamp, email, restaurants]
     email = submissions[i][1]
 
     // Papi <333
     preferred_places = Papa.parse(submissions[i][2]).data
+
+    // Papa parse assigns the values to the first
+    // row of a matrix since it expects an entire csv
+    preferred_places = preferred_places[0]
 
     // We want restaurants to map to users, not users to restaurants
     for (var j = 0; j < preferred_places.length; j++) {
@@ -34,6 +38,10 @@ function parseSubmissions(tsv) {
     }
 
     console.log("Parsed input from user " + email)
-    console.log(preferred_places)
   }
+
+  restaurants = knuth_shuffle(restaurants)
+
+  console.log("Shuffled restaurants:")
+  console.log(restaurants)
 }
