@@ -1,8 +1,8 @@
 // This file is a set of miscellaneous idempotent helper functions
 
 // Randomly shuffle the elements of an array/list
-function knuth_shuffle(to_shuffle) {
-  let i = to_shuffle.length;
+function knuthShuffle(toShuffle) {
+  let i = toShuffle.length;
   let tempVal;
   let randomIndex;
 
@@ -12,10 +12,10 @@ function knuth_shuffle(to_shuffle) {
       i -= 1;
 
       // Swap it with the current element
-      tempVal = to_shuffle[i];
-      to_shuffle[i] = to_shuffle[randomIndex];
-      to_shuffle[randomIndex] = tempVal;
+      tempVal = toShuffle[i];
+      toShuffle[i] = toShuffle[randomIndex];
+      toShuffle[randomIndex] = tempVal;
   }
 
-  return to_shuffle;
+  return toShuffle;
 }

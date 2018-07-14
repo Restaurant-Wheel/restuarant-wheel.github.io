@@ -25,22 +25,22 @@ function parseSubmissions(tsv) {
     email = submissions[i][1]
 
     // Papi <333
-    preferred_places = Papa.parse(submissions[i][2]).data
+    preferredPlaces = Papa.parse(submissions[i][2]).data
 
     // Papa parse assigns the values to the first
     // row of a matrix since it expects an entire csv
-    preferred_places = preferred_places[0]
+    preferredPlaces = preferredPlaces[0]
 
     // We want restaurants to map to users, not users to restaurants
-    for (var j = 0; j < preferred_places.length; j++) {
-      restaurant = new Restaurant(preferred_places[j], email)
+    for (var j = 0; j < preferredPlaces.length; j++) {
+      restaurant = new Restaurant(preferredPlaces[j], email)
       restaurants.push(restaurant)
     }
 
     console.log("Parsed input from user " + email)
   }
 
-  restaurants = knuth_shuffle(restaurants)
+  restaurants = knuthShuffle(restaurants)
 
   console.log("Shuffled restaurants:")
   console.log(restaurants)
