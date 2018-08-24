@@ -1,4 +1,5 @@
 @import 'color';
+@import 'mixins';
 
 body {
   background-color: $background;
@@ -6,12 +7,14 @@ body {
   font-size: 16pt;
 }
 
-.home {
-  left: 0;
-  margin: auto;
-  overflow: hidden;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  top: 30%;
+.init {
+  @include center;
+
+  display: block;
+}
+
+.selector {
+  @include center;
+
+  display: none;
 }

@@ -2,10 +2,12 @@ extends layouts/_layout
 
 block content
   script(async='' defer='' src='https://apis.google.com/js/api.js?onload=startApp')
-  .home
+  .init#init
     h1 Restaurant Selector
     | The Google form can be found&nbsp
     a(href='https://docs.google.com/forms/d/e/1FAIpQLSdZ-b8Flj8sAlHStgYjk1LJGkCD0PhUiAq3Jy_hA3mCcJF_bg/viewform?usp=sf_link') here
     | .
     br
     button.google#signInButton Login with Google
+  .selector#selector
+    h1 The selector portion
