@@ -102,7 +102,8 @@ function getFile(id) {
             mimeType: "text/tab-separated-values"
         }).then(function (response) {
             console.log("File imported:\n" + JSON.stringify(response.body));
-            parseSubmissions(JSON.stringify(response.body))
+            parseSubmissions(JSON.stringify(response.body));
+            window.location.href = 'selector.html';
         })
         .catch(err => console.log(err));
 }
