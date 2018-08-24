@@ -2,9 +2,19 @@
 @import 'mixins';
 
 body {
-  background-color: $background;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   font-size: 16pt;
+}
+
+$selection-time: 3s;
+
+.red {
+  background-color: $red;
+}
+
+.green {
+  background-color: $green;
+  transition: $selection-time;
 }
 
 .init {
@@ -17,4 +27,10 @@ body {
   @include center;
 
   display: none;
+  font-size: 8pt;
+
+  .grow {
+    font-size: 72pt;
+    transition: $selection-time;
+  }
 }
