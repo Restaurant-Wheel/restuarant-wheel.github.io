@@ -1,1 +1,1 @@
-pug-lint sass-lint
+pug-lint sass-lint eslint eslint-plugin-import eslint-config-airbnb-base

@@ -1,10 +1,10 @@
-function setupSelector() {
+function setupSelector() { // eslint-disable-line no-unused-vars
   // Hide the sign in element
-  var init_element = document.getElementById('init');
-  init_element.style.display = 'none';
+  const initElement = document.getElementById('init');
+  initElement.style.display = 'none';
 
   // Display the selector element
-  var selector_element = document.getElementById('selector');
-  selector_element.style.display = 'block';
+  const selectorElement = document.getElementById('selector');
+  selectorElement.style.display = 'block';
   console.log('Setting up selector');
 }

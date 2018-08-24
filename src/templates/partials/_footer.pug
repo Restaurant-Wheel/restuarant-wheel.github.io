@@ -1,4 +1,5 @@
 footer
   include ../partials/_config
   each script in scripts
-    script(src='build/js/' + script + '.min.js')
+    - var file_path = 'build/js/' + script + '.min.js'
+    script(src=file_path)
