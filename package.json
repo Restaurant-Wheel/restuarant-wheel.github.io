@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:garj4/restaurant.git",
-  "contributors": ["Garrett Wezniak <gaarj4@gmail.com>"],
+  "contributors": [
+    "Garrett Wezniak <gaarj4@gmail.com>"
+  ],
   "license": "MIT",
   "dependencies": {
     "browser-sync": "^2.24.5",
@@ -15,7 +17,6 @@
     "gulp-jsmin": "^0.1.5",
     "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.0.1",
-    "papaparse": "^4.5.0",
     "pug": "^2.0.3"
   },
   "scripts": {

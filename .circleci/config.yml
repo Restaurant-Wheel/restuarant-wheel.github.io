@@ -2,9 +2,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: yarnpkg/dev
+      - image: node
     steps:
       - checkout
       - run: 'yarn global add $(cat .circleci/packages.txt)'
       - run: 'pug-lint src/templates/*'
       - run: 'sass-lint src/scss/* -v -q --max-warnings=0'
+      - run: 'eslint src/js/*'

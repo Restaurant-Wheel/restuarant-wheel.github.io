@@ -1,6 +1,5 @@
 footer
-  script(src="build/js/papaparse.min.js")
-  script(src='build/js/google_auth.min.js')
-  script(src='build/js/parse_restaurants.min.js')
-  script(src='build/js/helpers.min.js')
-  script(async='', defer='', src='https://apis.google.com/js/api.js?onload=startApp')
+  include ../partials/_config
+  each script in scripts
+    - var file_path = 'build/js/' + script + '.min.js'
+    script(src=file_path)
