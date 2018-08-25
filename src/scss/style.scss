@@ -23,6 +23,19 @@ $selection-time: 3s;
   display: block;
 }
 
+.button {
+  background-color: $blue;
+  border: 2px solid $gray;
+  border-radius: 20px;
+  font-size: 16pt;
+  transition: 1s;
+
+  &:hover {
+    border: 5px solid $dark-gray;
+    transition: 1s;
+  }
+}
+
 .selector {
   @include center;
 
