@@ -7,7 +7,7 @@ function Restaurant(place, user) {
 
 function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
   // Prep the misformed JSON string to be a TSV
-  tsv = tsv.substring(1, tsv.length - 2);
+  tsv = tsv.substring(1, tsv.length - 1);
   tsv = tsv.replace(/(?:\\[r]+)/g, '');
   tsv = tsv.replace(/(?:\\[t]+)/g, '\t');
   tsv = tsv.replace(/(?:\\[n]+)/g, '\n');

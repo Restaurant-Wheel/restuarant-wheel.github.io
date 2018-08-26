@@ -2,7 +2,7 @@ const selectionTime = 3000;
 const restaurantChangeTime = 100;
 const resetTime = 500;
 
-let currentRestaurantIndex = 0;
+let restaurantIndex = 0;
 let countdownNum = 3;
 let restaurantChangeInterval;
 
@@ -66,11 +66,11 @@ function startSelection() { // eslint-disable-line no-unused-vars
 function cycleRestaurant() {
   console.log('In cycle restaurant.');
   const textElement = document.getElementById('selector-text');
-  textElement.innerText = restaurants[currentRestaurantIndex].place;
-  currentRestaurantIndex++;
+  textElement.innerText = restaurants[restaurantIndex].place;
+  restaurantIndex++;
 
-  if (currentRestaurantIndex >= restaurants.length) {
-    currentRestaurantIndex = 0;
+  if (restaurantIndex >= restaurants.length) {
+    restaurantIndex = 0;
   }
 }
 
@@ -80,7 +80,10 @@ function endSelection() {
 
   const restartButton = document.getElementById('restart-button');
   restartButton.style.display = 'block';
-  restartButton.style.textAlign = 'center';
+
+  const userElement = document.getElementById('user');
+  userElement.style.display = 'block';
+  userElement.innerText = restaurants[restaurantIndex].user;
 }
 
 function restartSelection() { // eslint-disable-line no-unused-vars
@@ -88,6 +91,9 @@ function restartSelection() { // eslint-disable-line no-unused-vars
 
   const restartButton = document.getElementById('restart-button');
   restartButton.style.display = 'none';
+
+  const userElement = document.getElementById('user');
+  userElement.style.display = 'none';
 
   // Shrink the text back down
   const textElement = document.getElementById('selector-text');
