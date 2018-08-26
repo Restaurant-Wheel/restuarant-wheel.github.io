@@ -3,6 +3,7 @@ const restaurantChangeTime = 100;
 const resetTime = 500;
 
 let currentRestaurantIndex = 0;
+let countdownNum = 3;
 let restaurantChangeInterval;
 
 function setupSelector() { // eslint-disable-line no-unused-vars
@@ -16,13 +17,33 @@ function setupSelector() { // eslint-disable-line no-unused-vars
   selectorElement.style.display = 'block';
 }
 
-function startSelection() { // eslint-disable-line no-unused-vars
-  console.log('Selecting a restaurant...');
+function countdown() {
+  console.log('Beginning Countdown...');
 
   // Hide the button that was just clicked
-  const selectorElement = document.getElementById('selector-button');
-  selectorElement.style.display = 'none';
+  const selectorButton = document.getElementById('selector-button');
+  selectorButton.style.display = 'none';
 
+  const countdownElement = document.getElementById('countdown');
+  countdownNum = 3;
+  countdownElement.innerText = countdownNum;
+  countdownElement.style.display = 'block';
+
+  changeNum = setInterval(() => {
+    console.log('In change num.');
+    countdownNum--;
+    countdownElement.innerText = countdownNum;
+
+    if (countdownNum <= 0) {
+      countdownElement.style.display = 'none';
+      clearInterval(changeNum);
+      startSelection();
+    }
+  }, 1000);
+}
+
+function startSelection() { // eslint-disable-line no-unused-vars
+  console.log('Selecting a restaurant...');
   const textElement = document.getElementById('selector-text');
 
   // The shrink class is added when you reset the selector
@@ -62,7 +83,7 @@ function endSelection() {
   restartButton.style.textAlign = 'center';
 }
 
-function restartSelection() {
+function restartSelection() { // eslint-disable-line no-unused-vars
   console.log('Resetting selection...');
 
   const restartButton = document.getElementById('restart-button');
@@ -76,5 +97,5 @@ function restartSelection() {
   document.body.classList.remove('green');
   document.body.classList.add('red');
 
-  setTimeout(startSelection, resetTime)
+  setTimeout(countdown, resetTime);
 }
