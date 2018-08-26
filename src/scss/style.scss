@@ -2,9 +2,21 @@
 @import 'mixins';
 
 body {
-  background-color: $background;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   font-size: 16pt;
+}
+
+$selection-time: 3s;
+$reset-time: .5s;
+
+.red {
+  background-color: $red;
+  transition: $reset-time;
+}
+
+.green {
+  background-color: $green;
+  transition: $selection-time;
 }
 
 .init {
@@ -13,8 +25,45 @@ body {
   display: block;
 }
 
+.button {
+  background-color: $blue;
+  border: 2px solid $gray;
+  border-radius: 20px;
+  font-size: 16pt;
+  transition: 1s;
+
+  &:hover {
+    border: 5px solid $dark-gray;
+    transition: 1s;
+  }
+
+  &.restart {
+    display: none;
+    margin: auto;
+  }
+}
+
 .selector {
   @include center;
 
   display: none;
+  font-size: 8pt;
+
+  .grow {
+    font-size: 72pt;
+    transition: $selection-time;
+  }
+
+  .shrink {
+    font-size: 8pt;
+    transition: $reset-time;
+  }
+
+  .countdown {
+    font-size: 72pt;
+  }
+
+  .user {
+    font-size: 24pt;
+  }
 }
