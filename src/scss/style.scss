@@ -7,9 +7,11 @@ body {
 }
 
 $selection-time: 3s;
+$reset-time: .5s;
 
 .red {
   background-color: $red;
+  transition: $reset-time;
 }
 
 .green {
@@ -34,6 +36,11 @@ $selection-time: 3s;
     border: 5px solid $dark-gray;
     transition: 1s;
   }
+
+  &.restart {
+    display: none;
+    margin: auto;
+  }
 }
 
 .selector {
@@ -45,5 +52,10 @@ $selection-time: 3s;
   .grow {
     font-size: 72pt;
     transition: $selection-time;
+  }
+
+  .shrink {
+    font-size: 8pt;
+    transition: $reset-time;
   }
 }
