@@ -19,10 +19,26 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
 
   submissions = submissions.data;
 
+  const allRestaurants = {};
+  const dislikes = {};
+  const vetoes = {};
+
   // Parse into custom object
   for (let i = 1; i < submissions.length; i++) {
-    // submission := [timestamp, email, restaurants]
-    [, email, submittedRestaurants] = submissions[i];
+    // submission := [timestamp, email, restaurants, dislike, veto]
+    [, email, submittedRestaurants, dislike, veto] = submissions[i];
+
+    if (dislike) {
+      if (dislike in dislikes) {
+        dislikes[dislike] += 1;
+      } else {
+        dislikes[dislike] = 1;
+      }
+    }
+
+    if (veto) {
+      vetoes[veto] = null;
+    }
 
     // Papi <333
     preferredPlaces = Papa.parse(submittedRestaurants).data;
@@ -33,12 +49,49 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
 
     // We want restaurants to map to users, not users to restaurants
     for (let j = 0; j < preferredPlaces.length; j++) {
-      restaurant = new Restaurant(preferredPlaces[j], email);
-      restaurants.push(restaurant);
+      const restaurant = preferredPlaces[j].trim();
+      if (restaurant in allRestaurants) {
+        allRestaurants[restaurant].push(email);
+      } else {
+        allRestaurants[restaurant] = [email];
+      }
     }
 
     console.log(`Parsed input from user ${email}`);
   }
+
+  console.log('Initial restaurant parsing:');
+  console.log(allRestaurants);
+  console.log('Vetoes:');
+  console.log(Object.keys(vetoes));
+  console.log('Dislikes:');
+  console.log(dislikes);
+
+  // Remove all copies of vetoed restaurants
+  // This can't be done as we parse because we don't have all the vetoes yet
+  Object.keys(vetoes).forEach((veto) => {
+    allRestaurants[veto] = [];
+  });
+
+  // Remove disliked restaurants
+  Object.keys(dislikes).forEach((dislikedPlace) => {
+    if (dislikedPlace in allRestaurants) {
+      if (allRestaurants[dislikedPlace].length <= dislikes[dislikedPlace]) {
+        allRestaurants[dislikedPlace] = [];
+      } else {
+        // Remove elements equal to the number of dislikes
+        allRestaurants[dislikedPlace].splice(0, dislikes[dislikedPlace]);
+      }
+    }
+  });
+
+  // Parse the restaurants
+  Object.keys(allRestaurants).forEach((restaurantName) => {
+    const emails = allRestaurants[restaurantName];
+    for (let i = 0; i < emails.length; i++) {
+      restaurants.push(new Restaurant(restaurantName, email));
+    }
+  });
 
   restaurants = knuthShuffle(restaurants);
 
