@@ -65,13 +65,14 @@ function startSelection() { // eslint-disable-line no-unused-vars
 
 function cycleRestaurant() {
   console.log('In cycle restaurant.');
-  const textElement = document.getElementById('selector-text');
-  textElement.innerText = restaurants[restaurantIndex].place;
   restaurantIndex++;
 
   if (restaurantIndex >= restaurants.length) {
     restaurantIndex = 0;
   }
+
+  const textElement = document.getElementById('selector-text');
+  textElement.innerText = restaurants[restaurantIndex].place;
 }
 
 function endSelection() {

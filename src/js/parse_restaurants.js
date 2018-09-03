@@ -8,9 +8,9 @@ function Restaurant(place, user) {
 function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
   // Prep the misformed JSON string to be a TSV
   tsv = tsv.substring(1, tsv.length - 1);
-  tsv = tsv.replace(/(?:\\[r]+)/g, '');
-  tsv = tsv.replace(/(?:\\[t]+)/g, '\t');
-  tsv = tsv.replace(/(?:\\[n]+)/g, '\n');
+  tsv = tsv.replace(/(?:\\[r])/g, '');
+  tsv = tsv.replace(/(?:\\[t])/g, '\t');
+  tsv = tsv.replace(/(?:\\[n])/g, '\n');
 
   // Let Papa do the heavy lifting <3
   let submissions = Papa.parse(tsv);
@@ -89,7 +89,7 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
   Object.keys(allRestaurants).forEach((restaurantName) => {
     const emails = allRestaurants[restaurantName];
     for (let i = 0; i < emails.length; i++) {
-      restaurants.push(new Restaurant(restaurantName, email));
+      restaurants.push(new Restaurant(restaurantName, emails[i]));
     }
   });
 
