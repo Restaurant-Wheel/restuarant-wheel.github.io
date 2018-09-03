@@ -26,7 +26,7 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
   // Parse into custom object
   for (let i = 1; i < submissions.length; i++) {
     // submission := [timestamp, email, restaurants, dislike, veto]
-    [, email, submittedRestaurants, dislike, veto] = submissions[i];
+    [, email, submittedRestaurants, dislike, veto, superlike] = submissions[i];
 
     if (dislike) {
       if (dislike in dislikes) {
@@ -46,6 +46,12 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
     // Papa parse assigns the values to the first
     // row of a matrix since it expects an entire csv
     preferredPlaces = preferredPlaces[0]; // eslint-disable-line prefer-destructuring
+
+    if (superlike) {
+      for (let j = 0; j < 3; j++) {
+        preferredPlaces.push(superlike);
+      }
+    }
 
     // We want restaurants to map to users, not users to restaurants
     for (let j = 0; j < preferredPlaces.length; j++) {
