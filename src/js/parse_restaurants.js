@@ -89,7 +89,7 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
   Object.keys(allRestaurants).forEach((restaurantName) => {
     const emails = allRestaurants[restaurantName];
     for (let i = 0; i < emails.length; i++) {
-      restaurants.push(new Restaurant(restaurantName, email));
+      restaurants.push(new Restaurant(restaurantName, emails[i]));
     }
   });
 
