@@ -72,7 +72,7 @@ function cycleRestaurant() {
   }
 
   const textElement = document.getElementById('selector-text');
-  if (restaurants.length == 0) {
+  if (restaurants.length === 0) {
     textElement.innerText = 'No restaurants....';
   } else {
     textElement.innerText = restaurants[restaurantIndex].place;
