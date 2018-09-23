@@ -25,14 +25,13 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
 
   // Parse into custom object
   for (let i = 1; i < submissions.length; i++) {
-    // submission := [timestamp, email, restaurants, dislike, veto]
-    [, email, submittedRestaurants, dislike, veto, superlike] = submissions[i];
+    // submission := [timestamp, email, restaurants, dislikes, veto, superlike, superdislike]
+    [, email, newRestaurants, newDislikes, veto, superlike, superdislike] = submissions[i];
 
-    if (dislike) {
-      if (dislike in dislikes) {
-        dislikes[dislike] += 1;
-      } else {
-        dislikes[dislike] = 1;
+    if (newDislikes) {
+      const parsedDislikes = Papa.parse(newDislikes).data[0];
+      for (let j = 0; j < parsedDislikes.length; j++) {
+        dislikePlace(parsedDislikes[j].trim(), dislikes);
       }
     }
 
@@ -41,7 +40,7 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
     }
 
     // Papi <333
-    preferredPlaces = Papa.parse(submittedRestaurants).data;
+    preferredPlaces = Papa.parse(newRestaurants).data;
 
     // Papa parse assigns the values to the first
     // row of a matrix since it expects an entire csv
@@ -50,6 +49,12 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
     if (superlike) {
       for (let j = 0; j < 3; j++) {
         preferredPlaces.push(superlike);
+      }
+    }
+
+    if (superdislike) {
+      for (let j = 0; j < 3; j++) {
+        dislikePlace(superdislike, dislikes);
       }
     }
 
@@ -103,4 +108,12 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
 
   console.log('Shuffled restaurants:');
   console.log(restaurants);
+}
+
+function dislikePlace(newDislike, dislikes) {
+  if (newDislike in dislikes) {
+    dislikes[newDislike] += 1;
+  } else {
+    dislikes[newDislike] = 1;
+  }
 }
