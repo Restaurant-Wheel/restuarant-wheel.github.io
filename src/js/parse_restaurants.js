@@ -25,14 +25,18 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
 
   // Parse into custom object
   for (let i = 1; i < submissions.length; i++) {
-    // submission := [timestamp, email, restaurants, dislike, veto]
-    [, email, submittedRestaurants, dislike, veto, superlike] = submissions[i];
+    // submission := [timestamp, email, restaurants, dislikes, veto, superlike]
+    [, email, submittedRestaurants, submittedDislikes, veto, superlike] = submissions[i];
 
-    if (dislike) {
-      if (dislike in dislikes) {
-        dislikes[dislike] += 1;
-      } else {
-        dislikes[dislike] = 1;
+    if (submittedDislikes) {
+      let parsedDislikes = Papa.parse(submittedDislikes).data[0];
+      for (let i = 0; i < parsedDislikes.length; i++) {
+        let dislike = parsedDislikes[i].trim();
+        if (dislike in dislikes) {
+          dislikes[dislike] += 1;
+        } else {
+          dislikes[dislike] = 1;
+        }
       }
     }
 
