@@ -25,18 +25,13 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
 
   // Parse into custom object
   for (let i = 1; i < submissions.length; i++) {
-    // submission := [timestamp, email, restaurants, dislikes, veto, superlike]
-    [, email, submittedRestaurants, submittedDislikes, veto, superlike] = submissions[i];
+    // submission := [timestamp, email, restaurants, dislikes, veto, superlike, superdislike]
+    [, email, submittedRestaurants, submittedDislikes, veto, superlike, superdislike] = submissions[i];
 
     if (submittedDislikes) {
       let parsedDislikes = Papa.parse(submittedDislikes).data[0];
       for (let i = 0; i < parsedDislikes.length; i++) {
-        let dislike = parsedDislikes[i].trim();
-        if (dislike in dislikes) {
-          dislikes[dislike] += 1;
-        } else {
-          dislikes[dislike] = 1;
-        }
+        dislikePlace(parsedDislikes[i].trim(), dislikes);
       }
     }
 
@@ -54,6 +49,12 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
     if (superlike) {
       for (let j = 0; j < 3; j++) {
         preferredPlaces.push(superlike);
+      }
+    }
+
+    if (superdislike) {
+      for (let j = 0; j < 3; j++) {
+        dislikePlace(superdislike, dislikes);
       }
     }
 
@@ -107,4 +108,12 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
 
   console.log('Shuffled restaurants:');
   console.log(restaurants);
+}
+
+function dislikePlace(newDislike, dislikes) {
+  if (newDislike in dislikes) {
+    dislikes[newDislike] += 1;
+  } else {
+    dislikes[newDislike] = 1;
+  }
 }
