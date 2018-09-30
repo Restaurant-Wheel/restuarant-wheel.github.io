@@ -21,22 +21,17 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
 
   const allRestaurants = {};
   const dislikes = {};
-  const vetoes = {};
 
   // Parse into custom object
   for (let i = 1; i < submissions.length; i++) {
-    // submission := [timestamp, email, restaurants, dislikes, veto, superlike, superdislike]
-    [, email, newRestaurants, newDislikes, veto, superlike, superdislike] = submissions[i];
+    // submission := [timestamp, email, restaurants, dislikes, superlike, superdislike]
+    [, email, newRestaurants, newDislikes, superlike, superdislike] = submissions[i];
 
     if (newDislikes) {
       const parsedDislikes = Papa.parse(newDislikes).data[0];
       for (let j = 0; j < parsedDislikes.length; j++) {
         dislikePlace(parsedDislikes[j].trim(), dislikes);
       }
-    }
-
-    if (veto) {
-      vetoes[veto] = null;
     }
 
     // Papi <333
@@ -73,17 +68,8 @@ function parseSubmissions(tsv) { // eslint-disable-line no-unused-vars
 
   console.log('Initial restaurant parsing:');
   console.log(allRestaurants);
-  console.log('Vetoes:');
-  console.log(Object.keys(vetoes));
   console.log('Dislikes:');
   console.log(dislikes);
-
-  // Remove all copies of vetoed restaurants
-  // This can't be done as we parse because we don't have all the vetoes yet
-  Object.keys(vetoes).forEach((veto) => {
-    allRestaurants[veto] = [];
-  });
-
   // Remove disliked restaurants
   Object.keys(dislikes).forEach((dislikedPlace) => {
     if (dislikedPlace in allRestaurants) {
